@@ -4,8 +4,13 @@
   <meta charset="UTF-8" />
   <title>🩸Crawling Decoder</title>
   <style>
+    @font-face {
+      font-family: 'DoctorGlitch';
+      src: url('fonts/DoctorGlitch.otf') format('opentype');
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'DoctorGlitch', Arial, sans-serif;
       background: #111;
       color: #eee;
       margin: 0;
@@ -72,8 +77,8 @@
 <body>
   <h2>🩸Crawling Decoder</h2>
   <textarea id="inputTexto" rows="6" placeholder="Type below the speech that Mr. Crawling sent!...ᰔ"></textarea><br/>
-  <button onclick="decodificar()">Decodificar</button>
-  <p><strong>Resultado:</strong></p>
+  <button onclick="decodificar()">Decode</button>
+  <p><strong>Result:</strong></p>
   <div id="saida"></div>
 
   <script>
