@@ -10,7 +10,7 @@
     }
 
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'DoctorGlitch', sans-serif;
       background: #111;
       color: #eee;
       margin: 0;
@@ -72,6 +72,7 @@
       width: 95%;
       max-width: 800px;
       border-radius: 10px;
+      font-family: 'Arial', sans-serif;
     }
   </style>
 </head>
@@ -83,7 +84,70 @@
   <div id="saida"></div>
 
   <script>
-    // ... seu código JS continua igual ...
+  const bengali = {
+    "অ":"A", "ব":"B", "চ":"C", "দ":"D", "এ":"E", "ফ":"F", "গ":"G", "হ":"H", "ই":"I",
+    "জ":"J", "ক":"K", "ল":"L", "ম":"M", "ন":"N", "ও":"O", "প":"P", "কু":"Q", "র":"R",
+    "স":"S", "ত":"T", "উ":"U", "ভ":"V", "উই":"W", "ক্ষ":"X", "য":"Y", "জ়":"Z"
+  };
+
+  const latinoArcaico = {
+    "𐌀":"A", "𐌁":"B", "𐌂":"C", "𐌃":"D", "𐌄":"E", "𐌅":"F", "𐌇":"H", "𐌉":"I",
+    "𐌊":"K", "𐌋":"L", "𐌌":"M", "𐌍":"N", "𐌏":"O", "𐍀":"P", "𐌒":"Q", "𐌓":"R",
+    "𐌔":"S", "𐌕":"T", "𐌖":"U", "𐌞":"W", "𐌗":"X", "𐌘":"Y", "𐌆":"Z"
+  };
+
+  const sulIndia = {
+    "ಅ":"A", "ಬ":"B", "ಚ":"C", "ದ":"D", "ಎ":"E", "ಫ":"F", "ಗ":"G", "ಹ":"H", "ಇ":"I",
+    "ಜ":"J", "ಕ":"K", "ಲ":"L", "ಮ":"M", "ನ":"N", "ಒ":"O", "ಪ":"P", "ಕ್ವ":"Q", "ರ":"R",
+    "ಸ":"S", "ತ":"T", "ಉ":"U", "ವ":"V", "ವ್":"W", "ಕ್ಸ":"X", "ಯ":"Y", "ಜ್":"Z"
+  };
+
+  const cirilico = {
+    "А":"A", "Б":"B", "Ц":"C", "Д":"D", "Е":"E", "Ф":"F", "Г":"G", "Х":"H", "И":"I",
+    "Ж":"J", "К":"K", "Л":"L", "М":"M", "Н":"N", "О":"O", "П":"P", "КУ":"Q", "Р":"R",
+    "С":"S", "Т":"T", "У":"U", "В":"V", "ВВ":"W", "КС":"X", "Й":"Y", "З":"Z"
+  };
+
+  const hiragana = {
+    "あ":"A", "び":"B", "ち":"C", "だ":"D", "え":"E", "ふ":"F", "が":"G", "ひ":"H", "い":"I",
+    "じ":"J", "き":"K", "ら":"L", "ま":"M", "な":"N", "お":"O", "ぱ":"P", "く":"Q", "ら":"R",
+    "さ":"S", "た":"T", "う":"U", "ゔ":"V", "ゔぃ":"W", "くす":"X", "や":"Y", "ず":"Z"
+  };
+
+  const ucas = {
+    "ᐊ":"A", "ᐯ":"B", "ᒐ":"C", "ᑕ":"D", "ᐁ":"E", "ᕓ":"F", "ᑲ":"G", "ᕼ":"H", "ᐃ":"I",
+    "ᔕ":"J", "ᑭ":"K", "ᒪ":"L", "ᒣ":"M", "ᓇ":"N", "ᐅ":"O", "ᐸ":"P", "ᖃ":"Q", "ᕒ":"R",
+    "ᔅ":"S", "ᑎ":"T", "ᐆ":"U", "ᐧᐤ":"W", "ᐊᔅ":"X", "ᔦ":"Y", "ᔓ":"Z"
+  };
+
+  const mapaCompleto = Object.assign({}, bengali, latinoArcaico, sulIndia, cirilico, hiragana, ucas);
+
+  function decodificar() {
+    const texto = document.getElementById("inputTexto").value;
+    let resultado = "";
+    let i = 0;
+
+    while (i < texto.length) {
+      let encontrado = false;
+
+      for (let tamanho = 3; tamanho > 0; tamanho--) {
+        let trecho = texto.slice(i, i + tamanho);
+        if (mapaCompleto[trecho]) {
+          resultado += mapaCompleto[trecho];
+          i += tamanho;
+          encontrado = true;
+          break;
+        }
+      }
+
+      if (!encontrado) {
+        resultado += texto.charAt(i);
+        i++;
+      }
+    }
+
+    document.getElementById("saida").textContent = resultado;
+  }
   </script>
 </body>
 </html>
